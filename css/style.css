@@ -1,0 +1,323 @@
+/* =====================================================================
+   I VINI DI NICK – Stili
+   Base: Bootstrap 5.3. Tema scuro ad alto contrasto, pensato per la
+   lettura al tavolo con poca luce, da smartphone.
+   1. Variabili   2. Base   3. Header e barra categorie   4. Home
+   5. Pagina categoria   6. Card vino   7. Footer   8. Pagine testo
+   ===================================================================== */
+
+/* ---------- 1. Variabili ---------- */
+:root {
+  --nero: #0e0c0b;
+  --nero-card: #181512;
+  --nero-soft: #221d18;
+  --oro: #d4b26a;
+  --oro-chiaro: #ecd9a8;
+  --testo: #f4efe6;
+  --testo-muto: #bdb3a3;          /* contrasto AA su fondo scuro */
+  --bordo: rgba(212, 178, 106, .22);
+
+  --c-bianco: #ecdca0;
+  --c-rosso: #c9566a;
+  --c-bollicine: #e3c77c;
+  --c-rosato: #ee9fad;
+
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --raggio: 14px;
+  --header-h: 60px;
+  --tab-h: 68px;
+
+  --bs-body-bg: var(--nero);
+  --bs-body-color: var(--testo);
+  --bs-body-font-family: var(--sans);
+}
+
+/* ---------- 2. Base ---------- */
+html { scroll-padding-top: calc(var(--header-h) + 12px); }
+body {
+  background: var(--nero);
+  color: var(--testo);
+  font-family: var(--sans);
+  font-size: 17px;                 /* leggibile al tavolo */
+  line-height: 1.55;
+  padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom));  /* spazio barra mobile */
+  -webkit-font-smoothing: antialiased;
+}
+@media (min-width: 768px) { body { padding-bottom: 0; } }
+
+a { color: var(--oro-chiaro); }
+a:hover { color: #fff; }
+:focus-visible { outline: 3px solid var(--oro); outline-offset: 3px; border-radius: 6px; }
+
+.skip-link {
+  position: absolute; top: .5rem; left: .5rem; z-index: 2000;
+  background: var(--oro); color: var(--nero); padding: .5rem 1rem; border-radius: 8px;
+}
+
+h1, h2, h3, .serif { font-family: var(--serif); font-weight: 600; color: var(--testo); }
+
+/* Icone calice (SVG) */
+.tab-icona svg, .card-icona svg, .foto-vuota svg {
+  fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+}
+svg .liquido { fill: currentColor; stroke: none; opacity: .45; }
+
+/* ---------- 3. Header e barra categorie ---------- */
+.header {
+  position: sticky; top: 0; z-index: 1020;
+  height: var(--header-h);
+  display: flex; align-items: center;
+  background: rgba(14, 12, 11, .92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--bordo);
+}
+.header .container { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.marchio {
+  font-family: var(--serif); font-size: 1.35rem; color: var(--testo);
+  text-decoration: none; white-space: nowrap;
+}
+.marchio em { color: var(--oro); }
+.header-link { font-size: .9rem; color: var(--testo-muto); text-decoration: none; }
+.header-link:hover { color: var(--oro-chiaro); }
+
+/* Barra categorie: in basso su smartphone, sotto l'header su desktop */
+.barra-categorie {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1030;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: rgba(20, 17, 14, .97);
+  border-top: 1px solid var(--bordo);
+}
+.tab {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  color: var(--testo-muto); text-decoration: none; font-size: .78rem; letter-spacing: .02em;
+}
+.tab i { font-size: 1.3rem; line-height: 1; }
+.tab-icona { width: 26px; height: 26px; display: block; }
+.tab-icona svg { width: 100%; height: 100%; }
+.tab.attiva { color: var(--oro); }
+.tab.attiva span:last-child { font-weight: 500; }
+.tab-bianco.attiva { color: var(--c-bianco); }
+.tab-rosso.attiva { color: var(--c-rosso); }
+.tab-bollicine.attiva { color: var(--c-bollicine); }
+.tab-rosato.attiva { color: var(--c-rosato); }
+
+@media (min-width: 768px) {
+  .barra-categorie {
+    position: sticky; top: var(--header-h); bottom: auto;
+    height: auto; padding: .6rem 0;
+    display: flex; justify-content: center; gap: .5rem;
+    background: rgba(14, 12, 11, .92);
+    border-top: 0; border-bottom: 1px solid var(--bordo);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .tab {
+    flex-direction: row; gap: .45rem; font-size: .95rem;
+    padding: .45rem 1rem; border-radius: 999px; border: 1px solid transparent;
+  }
+  .tab:hover { color: var(--testo); border-color: var(--bordo); }
+  .tab.attiva { border-color: currentColor; background: rgba(255, 255, 255, .03); }
+  .tab-icona { width: 20px; height: 20px; }
+  .tab i { font-size: 1.05rem; }
+}
+
+/* ---------- 4. Home ---------- */
+.hero { text-align: center; padding: 2.75rem 0 1.75rem; }
+.eyebrow {
+  font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--oro);
+}
+.hero h1 { font-size: clamp(2.6rem, 11vw, 4.5rem); margin: .4rem 0 .2rem; line-height: 1.05; }
+.hero h1 em { color: var(--oro); font-weight: 400; }
+.divisore { width: 64px; height: 1px; background: var(--oro); margin: 1.1rem auto; }
+.hero p { color: var(--testo-muto); max-width: 34rem; margin: 0 auto; }
+
+.griglia-categorie {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem;
+  max-width: 760px; margin: 0 auto;
+}
+.card-categoria {
+  position: relative;
+  display: flex; flex-direction: column; align-items: flex-start; gap: .25rem;
+  min-height: 150px; padding: 1.1rem;
+  background: linear-gradient(160deg, var(--nero-soft), var(--nero-card));
+  border: 1px solid var(--bordo); border-radius: var(--raggio);
+  color: var(--testo); text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.card-categoria:hover { transform: translateY(-3px); border-color: currentColor; color: var(--testo); }
+.card-icona { width: 42px; height: 42px; margin-bottom: auto; }
+.card-icona svg { width: 100%; height: 100%; }
+.card-titolo { font-family: var(--serif); font-size: 1.5rem; line-height: 1.1; }
+.card-conteggio { font-size: .85rem; color: var(--testo-muto); }
+.card-freccia { position: absolute; top: 1rem; right: 1rem; color: var(--testo-muto); }
+.card-bianco .card-icona { color: var(--c-bianco); }
+.card-rosso .card-icona { color: var(--c-rosso); }
+.card-bollicine .card-icona { color: var(--c-bollicine); }
+.card-rosato .card-icona { color: var(--c-rosato); }
+.card-bianco:hover { border-color: var(--c-bianco); }
+.card-rosso:hover { border-color: var(--c-rosso); }
+.card-bollicine:hover { border-color: var(--c-bollicine); }
+.card-rosato:hover { border-color: var(--c-rosato); }
+
+@media (min-width: 768px) {
+  .griglia-categorie { grid-template-columns: repeat(4, 1fr); max-width: 1000px; }
+  .card-categoria { min-height: 190px; padding: 1.4rem; }
+}
+
+.nota-casa {
+  max-width: 760px; margin: 2rem auto 0; padding: 1rem 1.2rem;
+  border: 1px dashed var(--bordo); border-radius: var(--raggio);
+  color: var(--testo-muto); font-size: .95rem; text-align: center;
+}
+
+/* ---------- 5. Pagina categoria ---------- */
+.intestazione { padding: 1.6rem 0 1rem; }
+.intestazione h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); margin: 0; }
+.intestazione .conteggio { color: var(--testo-muto); font-size: .95rem; }
+body[data-categoria="bianco"] .intestazione h1 { color: var(--c-bianco); }
+body[data-categoria="rosso"] .intestazione h1 { color: var(--c-rosso); }
+body[data-categoria="bollicine"] .intestazione h1 { color: var(--c-bollicine); }
+body[data-categoria="rosato"] .intestazione h1 { color: var(--c-rosato); }
+
+.strumenti { display: grid; grid-template-columns: 1fr; gap: .6rem; margin-bottom: .5rem; }
+@media (min-width: 576px) { .strumenti { grid-template-columns: 1fr 220px; } }
+.campo {
+  position: relative;
+}
+.campo i { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); color: var(--testo-muto); pointer-events: none; }
+.strumenti input, .strumenti select {
+  width: 100%; min-height: 48px;
+  background: var(--nero-card); color: var(--testo);
+  border: 1px solid var(--bordo); border-radius: 12px;
+  padding: .6rem .9rem; font-size: 1rem; font-family: var(--sans);
+}
+.strumenti input { padding-left: 2.5rem; }
+.strumenti input::placeholder { color: #8f8677; }
+.strumenti input:focus, .strumenti select:focus { outline: none; border-color: var(--oro); box-shadow: 0 0 0 3px rgba(212, 178, 106, .25); }
+.strumenti select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23d4b26a' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right .9rem center; background-size: 14px;
+  padding-right: 2.4rem;
+}
+
+.titolo-regione {
+  display: flex; align-items: baseline; gap: .6rem;
+  font-size: 1.25rem; margin: 1.75rem 0 .6rem; color: var(--oro-chiaro);
+}
+.titolo-regione::after { content: ""; flex: 1; height: 1px; background: var(--bordo); }
+.titolo-regione span { font-family: var(--sans); font-size: .8rem; color: var(--testo-muto); font-weight: 400; order: 2; }
+
+.lista { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+@media (min-width: 992px) { .lista { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+.nessun-risultato { text-align: center; color: var(--testo-muto); padding: 2.5rem 0; }
+
+/* ---------- 6. Card vino ---------- */
+.vino details {
+  background: var(--nero-card);
+  border: 1px solid var(--bordo); border-radius: var(--raggio);
+  overflow: hidden;
+}
+.vino details[open] { border-color: rgba(212, 178, 106, .5); }
+.vino summary {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: .85rem; align-items: center;
+  padding: .7rem .85rem .7rem .7rem;
+  cursor: pointer; list-style: none;
+}
+.vino summary::-webkit-details-marker { display: none; }
+
+.vino-foto {
+  width: 64px; height: 86px; border-radius: 10px; overflow: hidden;
+  background: #120f0d; display: block;
+}
+.vino-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto-vuota { width: 100%; height: 100%; display: grid; place-items: center; color: var(--oro); }
+.foto-vuota svg { width: 60%; height: 60%; }
+
+.vino-testo { display: flex; flex-direction: column; min-width: 0; }
+.vino-nome { font-family: var(--serif); font-size: 1.08rem; line-height: 1.25; color: var(--testo); }
+.vino-cantina { color: var(--oro-chiaro); font-size: .92rem; margin-top: .1rem; }
+.vino-info { color: var(--testo-muto); font-size: .86rem; }
+.vino-badge { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .35rem; }
+.badge-vino {
+  font-size: .7rem; letter-spacing: .04em; text-transform: uppercase;
+  padding: .12rem .5rem; border-radius: 999px; border: 1px solid currentColor;
+}
+.badge-casa { color: var(--oro); }
+.badge-bio { color: #9fd18b; }
+.badge-novita { color: #8fc3ff; }
+.badge-consigliato { color: var(--c-rosato); }
+
+.vino-prezzo {
+  display: flex; flex-direction: column; align-items: flex-end; gap: .15rem;
+  font-weight: 500; font-size: 1.05rem; color: var(--testo); white-space: nowrap;
+}
+.vino-prezzo small { font-weight: 400; font-size: .78rem; color: var(--testo-muto); }
+.vino-apri { color: var(--testo-muto); font-size: .9rem; transition: transform .2s ease; margin-top: .2rem; }
+details[open] .vino-apri { transform: rotate(180deg); }
+
+.vino-dettagli {
+  padding: 0 1rem 1rem calc(64px + .7rem + .85rem);
+  color: var(--testo-muto); font-size: .95rem;
+}
+.vino-dettagli p { margin: 0 0 .45rem; }
+.vino-dettagli strong { color: var(--testo); font-weight: 500; }
+.vino-regione { font-size: .85rem; }
+@media (max-width: 400px) { .vino-dettagli { padding-left: 1rem; } }
+
+/* ---------- 7. Footer ---------- */
+.footer {
+  margin-top: 3.5rem; padding: 2.25rem 0 1.5rem;
+  border-top: 1px solid var(--bordo); background: #0a0908;
+  color: var(--testo-muto); font-size: .95rem;
+}
+.footer a { color: var(--testo-muto); text-decoration: none; }
+.footer a:hover { color: var(--oro-chiaro); }
+.footer-griglia { display: grid; gap: 1.5rem; }
+@media (min-width: 768px) { .footer-griglia { grid-template-columns: 1fr auto; align-items: end; } }
+.footer-marchio { font-family: var(--serif); font-size: 1.5rem; color: var(--testo); margin-bottom: .5rem; }
+.footer-marchio em { color: var(--oro); }
+.footer-azioni { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.btn-oro-outline {
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: .5rem 1.1rem; border-radius: 999px;
+  border: 1px solid var(--oro); color: var(--oro-chiaro) !important;
+}
+.btn-oro-outline:hover { background: var(--oro); color: var(--nero) !important; }
+.social { display: flex; gap: .5rem; }
+.social a {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 1px solid var(--bordo); border-radius: 50%; font-size: 1.1rem;
+}
+.footer-legale {
+  display: flex; flex-direction: column; align-items: center; gap: .6rem;
+  margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--bordo);
+  font-size: .82rem; text-align: center;
+}
+@media (min-width: 768px) {
+  .footer-legale { flex-direction: row; justify-content: space-between; text-align: left; }
+}
+
+/* Firma Noifla */
+.credit-link { display: inline-flex; align-items: center; gap: .5rem; color: #8b8377 !important; transition: color .2s ease; }
+.credit-icon { flex-shrink: 0; }
+.credit-accent { stroke: currentColor; transition: stroke .2s ease; }
+.credit-accent-fill { fill: currentColor; transition: fill .2s ease; }
+.credit-link:hover, .credit-link:focus-visible { color: #fff !important; }
+.credit-link:hover .credit-accent, .credit-link:focus-visible .credit-accent { stroke: var(--oro); }
+.credit-link:hover .credit-accent-fill, .credit-link:focus-visible .credit-accent-fill { fill: var(--oro); }
+
+/* ---------- 8. Pagine di testo (privacy) ---------- */
+.testo-legale { max-width: 760px; padding-top: 1.75rem; }
+.testo-legale h1 { font-size: clamp(2rem, 7vw, 2.6rem); }
+.testo-legale h2 { font-size: 1.2rem; margin: 1.75rem 0 .6rem; color: var(--oro-chiaro); }
+.testo-legale p, .testo-legale li { color: var(--testo-muto); }
+.testo-legale strong { color: var(--testo); font-weight: 500; }
+.todo { background: rgba(250, 204, 21, .2); color: #fde68a; padding: 0 .3rem; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}

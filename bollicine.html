@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bollicine · Carta dei vini di Le Tradizioni di Nick</title>
+  <meta name="description" content="Le bollicine: Prosecco, Franciacorta, Trentodoc e Champagne della carta di Le Tradizioni di Nick ad Alfonsine, con cantina, vitigni, annata, prezzi e abbinamenti.">
+  <meta name="theme-color" content="#0e0c0b">
+  <meta property="og:title" content="Bollicine · Carta dei vini di Le Tradizioni di Nick">
+  <meta property="og:description" content="Le bollicine: Prosecco, Franciacorta, Trentodoc e Champagne della carta di Le Tradizioni di Nick ad Alfonsine, con cantina, vitigni, annata, prezzi e abbinamenti.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="css/style.css?v=1" rel="stylesheet">
+</head>
+<body data-categoria="bollicine">
+  <a class="skip-link visually-hidden-focusable" href="#contenuto">Vai al contenuto</a>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="marchio" aria-label="I Vini di Nick – torna alla carta">I Vini <em>di Nick</em></a>
+      <a href="https://www.letradizionidinick.it/" class="header-link" target="_blank" rel="noopener">Le Tradizioni di Nick <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i></a>
+    </div>
+  </header>
+
+  <!-- Barra categorie (generata da js/main.js): in basso su smartphone, in alto su desktop -->
+  <nav id="barra-categorie" class="barra-categorie" aria-label="Categorie di vini"></nav>
+
+  <main id="contenuto" class="container">
+    <div class="intestazione">
+      <a href="index.html" class="header-link"><i class="bi bi-arrow-left" aria-hidden="true"></i> Tutte le categorie</a>
+      <h1>Bollicine</h1>
+      <p class="conteggio mb-0" id="conteggio" aria-live="polite"></p>
+    </div>
+
+    <div class="strumenti" role="search">
+      <label class="campo mb-0">
+        <span class="visually-hidden">Cerca un vino</span>
+        <i class="bi bi-search" aria-hidden="true"></i>
+        <input type="search" id="cerca" placeholder="Cerca per nome, cantina, vitigno…" autocomplete="off" enterkeyhint="search">
+      </label>
+      <label class="mb-0">
+        <span class="visually-hidden">Ordina</span>
+        <select id="ordina">
+          <option value="regione">Per regione</option>
+          <option value="prezzo-su">Prezzo: dal più basso</option>
+          <option value="prezzo-giu">Prezzo: dal più alto</option>
+          <option value="nome">Nome A–Z</option>
+        </select>
+      </label>
+    </div>
+
+    <p class="text-center small mb-0" style="color:var(--testo-muto)">Tocca un vino per descrizione e abbinamenti · Prezzi a bottiglia</p>
+
+    <!-- Lista vini (generata da js/main.js leggendo js/vini.js) -->
+    <div id="lista-vini"></div>
+    <p id="nessun-risultato" class="nessun-risultato" hidden>Nessun vino trovato. Prova con un'altra parola.</p>
+  </main>
+
+  <footer id="footer" class="footer"></footer>
+
+  <noscript><p class="text-center p-3">Per vedere la carta dei vini attiva JavaScript nel browser.</p></noscript>
+
+  <!-- 1) dati dei vini  2) logica del sito -->
+  <script src="js/vini.js?v=1"></script>
+  <script src="js/main.js?v=1"></script>
+</body>
+</html>
